@@ -22,6 +22,7 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
 import { UpdateCompanyComponent } from './components/update-company/update-company.component';
 import { CompanyBankComponent } from './components/company-bank/company-bank.component';
 import { BankDetailsComponent } from './components/bank-details/bank-details.component';
+import { MedicinesComponent } from './components/medicines/medicines.component';
 
 
 
@@ -36,7 +37,8 @@ import { BankDetailsComponent } from './components/bank-details/bank-details.com
     CompanyDetailsComponent,
     UpdateCompanyComponent,
     CompanyBankComponent,
-    BankDetailsComponent
+    BankDetailsComponent,
+    MedicinesComponent
   ],
   imports: [
     BrowserModule,

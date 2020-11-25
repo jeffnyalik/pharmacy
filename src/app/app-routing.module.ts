@@ -1,3 +1,4 @@
+import { MedicinesComponent } from './components/medicines/medicines.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'admin/login', component: LoginComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: 'company', component: CompanyComponent, canActivate: [AuthGuard]},
+  {path: 'medicines', component: MedicinesComponent},
   {path: 'company/:id', component: CompanyDetailsComponent},
   {path: 'company-bank', component: CompanyBankComponent},
   {path: 'bank-details/:id', component: BankDetailsComponent},
