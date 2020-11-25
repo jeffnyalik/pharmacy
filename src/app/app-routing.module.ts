@@ -1,3 +1,4 @@
+import { CustomersRequestComponent } from './components/customers-request/customers-request.component';
 import { MedicinesComponent } from './components/medicines/medicines.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +15,7 @@ import { CompanyComponent } from './components/company/company.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UpdateCompanyComponent } from './components/update-company/update-company.component';
+import { CustomersComponent } from './components/customers/customers.component';
 
 
 
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: 'company', component: CompanyComponent, canActivate: [AuthGuard]},
   {path: 'medicines', component: MedicinesComponent},
+  {path: 'customers', component: CustomersComponent},
+  {path: 'customer-request', component:CustomersRequestComponent},
   {path: 'company/:id', component: CompanyDetailsComponent},
   {path: 'company-bank', component: CompanyBankComponent},
   {path: 'bank-details/:id', component: BankDetailsComponent},

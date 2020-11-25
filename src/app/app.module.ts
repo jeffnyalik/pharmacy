@@ -23,6 +23,8 @@ import { UpdateCompanyComponent } from './components/update-company/update-compa
 import { CompanyBankComponent } from './components/company-bank/company-bank.component';
 import { BankDetailsComponent } from './components/bank-details/bank-details.component';
 import { MedicinesComponent } from './components/medicines/medicines.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { CustomersRequestComponent } from './components/customers-request/customers-request.component';
 
 
 
@@ -38,7 +40,9 @@ import { MedicinesComponent } from './components/medicines/medicines.component';
     UpdateCompanyComponent,
     CompanyBankComponent,
     BankDetailsComponent,
-    MedicinesComponent
+    MedicinesComponent,
+    CustomersComponent,
+    CustomersRequestComponent
   ],
   imports: [
     BrowserModule,

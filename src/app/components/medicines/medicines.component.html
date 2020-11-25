@@ -1,1 +1,95 @@
-<p>medicines works!</p>
+<app-navbar></app-navbar>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0 text-dark" style="font-family:sans-serif;">Dashboard</h4>
+                </div>
+                <hr>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <button class="btn btn-info rounded-0">Add Record</button>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+        <hr/>
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of Medicines</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-success rounded-0">Add Medicine</button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>BP</th>
+                                        <th>SP</th>
+                                        <th>Batch no.</th>
+                                        <th>Shelf no.</th>
+                                        <th>Mfgd</th>
+                                        <th>Exp</th>
+                                        <th>Stock</th>
+                                        <th>Description</th>
+
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let med of medicineInfo">
+                                        <td>{{med.name}}</td>
+                                        <td>{{med.medical_type}}</td>
+                                        <td>{{med.buy_price}}</td>
+                                        <td>{{med.sell_price}}</td>
+                                        <td>{{med.batch_no}}</td>
+                                        <td>{{med.shelf_no}}</td>
+                                        <td>{{med.mfg_date}}</td>
+                                        <td>{{med.exp_date}}</td>
+                                        <td>{{med.in_stock_total}}</td>
+                                        <td>{{med.description}}</td>
+                                        <td>
+                                            <a class="btn btn-info rounded-0 btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <a class="btn btn-danger rounded-0 btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Main row -->
+
+            <!-- /.row -->
+        </div>
+        <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
