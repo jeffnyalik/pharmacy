@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 
 import { first } from 'rxjs/operators';
 
-
 import { Company } from './../../Entities/company';
 import { CompanyService } from './../../shared/company.service';
 
@@ -20,9 +19,9 @@ import { CompanyService } from './../../shared/company.service';
 })
 export class CompanyDetailsComponent implements OnInit {
   formModel: FormGroup = new FormGroup({});
-  company: Company;
   id: any;
   companyDetails;
+  bankInfo; // to be removed later;
   submitted = false;
   confirmDelete = false;
   modalRef: BsModalRef;
@@ -30,6 +29,7 @@ export class CompanyDetailsComponent implements OnInit {
   constructor(private compService: CompanyService, private route: ActivatedRoute, 
     private modalService: BsModalService, private fb: FormBuilder, private toastr: ToastrService, private router: Router) {
     this.formModel = this.fb.group({
+      bank_id: ['', Validators.required],
       name: ['', Validators.required],
       license_no: ['', Validators.required],
       contact_no: ['', Validators.required],
@@ -47,6 +47,10 @@ export class CompanyDetailsComponent implements OnInit {
 
     this.getCompanyDetails(this.route.snapshot.paramMap.get('id'));
     this.id = this.route.snapshot.paramMap.get('id');
+    this.compService.getcompanyBank().subscribe(data =>{
+      this.bankInfo = data;
+      console.log(this.bankInfo);
+    });
   }
   getCompanyDetails(id){
     this.compService.getCompanyDetail(id).subscribe(data => {
@@ -74,11 +78,15 @@ export class CompanyDetailsComponent implements OnInit {
     if (this.formModel.invalid){
       return;
     }else{
-      this.compService.updateCompany(this.id, this.companyDetails).subscribe(data => {
+      this.compService.updateCompany(this.id, this.formModel.value).subscribe(data => {
         this.toastr.success('updated successfully');
         this.companyDetails = data;
         console.log(this.companyDetails);
-      }, error => {console.log(error); });
+      }, error => {
+        this.toastr.error('Error');
+        this.router.navigate(['/bank-details']);
+        console.log(error);
+       });
     }
   }
 

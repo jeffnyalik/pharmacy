@@ -21,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { UpdateCompanyComponent } from './components/update-company/update-company.component';
 import { CompanyBankComponent } from './components/company-bank/company-bank.component';
+import { BankDetailsComponent } from './components/bank-details/bank-details.component';
 
 
 
@@ -34,7 +35,8 @@ import { CompanyBankComponent } from './components/company-bank/company-bank.com
     CompanyComponent,
     CompanyDetailsComponent,
     UpdateCompanyComponent,
-    CompanyBankComponent
+    CompanyBankComponent,
+    BankDetailsComponent
   ],
   imports: [
     BrowserModule,

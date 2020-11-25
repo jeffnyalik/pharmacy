@@ -42,4 +42,13 @@ export class CompanyService {
   addcompanyBank(companyBank: CompanyBank){
     return this.http.post(`${this.companyBankUrl}`, companyBank);
   }
+  bankDetail(id): Observable<any>{
+    return this.http.get(`${this.companyBankUrl}${id}`, id);
+  }
+  updateBank(id, data): Observable<any>{
+    return this.http.put(`${this.companyBankUrl}${id}/`, data);
+  }
+  deleteBank(id): Observable<any>{
+    return this.http.delete(`${this.companyBankUrl}${id}`);
+  }
 }

@@ -55,35 +55,25 @@
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Company Name</th>
-                                        <th>Contact No</th>
-                                        <th>IFSC No</th>
-                                        <th>Email</th>
+
                                         <th>Bank Account</th>
                                         <th>Account No</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+
                                 <tbody *ngFor="let info of companyBankInfo">
                                     <tr>
-                                        <td>{{info.company_id.name}}</td>
-                                        <td>{{info.company_id.contact_no}}</td>
-                                        <td>{{info.ifsc_no}}</td>
-                                        <td>{{info.company_id.email}}</td>
                                         <td>{{info.bank_name}}</td>
                                         <td>{{info.bank_account_no}}</td>
                                         <td>
-                                            <a href="" class="btn btn-info btn-sm rounded-0">view</a>
+                                            <a [routerLink]="['/bank-details', info.id]" routerLinkActive="router-link-active" class="btn btn-info btn-sm rounded-0">Details</a>
                                         </td>
                                     </tr>
 
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Company Name</th>
-                                        <th>Contact No</th>
-                                        <th>IFSC No</th>
-                                        <th>Email</th>
                                         <th>Bank Account</th>
                                         <th>Account No</th>
                                         <th>Actions</th>
@@ -126,19 +116,6 @@
                     <div *ngIf="f.bank_name.touched && f.bank_name.invalid" class="alert alert-danger">
                         <div *ngIf="f.bank_name.errors.required">required.</div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <input formControlName="ifsc_no" class="form-control" placeholder="IFSC no">
-                    <div *ngIf="f.ifsc_no.touched && f.ifsc_no.invalid" class="alert alert-danger">
-                        <div *ngIf="f.ifsc_no.errors.required">required.</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <select formControlName="company_id" class="form-control">
-                        <option value="">--select-company--</option>
-                        <option *ngFor="let info of companyBankInfo"  value="{{info.company_id.id}}">{{info.company_id.name}}</option>
-                    </select>
                 </div>
 
                 <div>

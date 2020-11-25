@@ -6,6 +6,7 @@ export class Company{
         public address: string,
         public contact_no: string,
         public email: string,
-        public description: string
+        public description: string,
+        public bank_id: number //drop downn list
     ){}
 }

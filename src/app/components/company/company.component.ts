@@ -1,12 +1,17 @@
-import { Company } from './../../Entities/company';
 import { Router } from '@angular/router';
-import { CompanyService } from './../../shared/company.service';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { first, switchMap } from 'rxjs/operators';
+
 import { ToastrService } from 'ngx-toastr';
+
 import { Observable, BehaviorSubject } from 'rxjs';
+
+import { Company } from './../../Entities/company';
+import { CompanyService } from './../../shared/company.service';
 
 
 @Component({
@@ -23,6 +28,7 @@ export class CompanyComponent implements OnInit {
   constructor(private compService: CompanyService, private modalService: BsModalService, 
     private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
     this.formModel = this.fb.group({
+      bank_id: ['', Validators.required],
       name: ['', Validators.required],
       license_no: ['', Validators.required],
       contact_no: ['', Validators.required],

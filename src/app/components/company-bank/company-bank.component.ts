@@ -18,18 +18,17 @@ import { CompanyService } from './../../shared/company.service';
 })
 export class CompanyBankComponent implements OnInit {
   companyBankInfo;
-  companyBank: Observable<CompanyBank[]>;
+  nothing;
   formModel: FormGroup = new FormGroup({});
   modalRef: BsModalRef;
   submitted = false;
   constructor(private  compService: CompanyService, private modalService: BsModalService,
-    private fb:FormBuilder
-    ) { 
+    private fb:FormBuilder, private toastr: ToastrService
+    ) {
     this.formModel = this.fb.group({
-      company_id: [Validators.required],
       bank_name: ['', Validators.required],
       bank_account_no: ['', Validators.required],
-      ifsc_no: ['', Validators.required]
+     
     });
   }
   get f(){
@@ -52,8 +51,10 @@ export class CompanyBankComponent implements OnInit {
     }else{
       this.compService.addcompanyBank(this.formModel.value).pipe(first()).subscribe(
         data =>{
+          this.toastr.success('Data has been inserted');
           console.log('Data has been inserted successfully');
         }, error => {
+          this.toastr.error('Error has occured.');
           console.log(error);
         }
       );
