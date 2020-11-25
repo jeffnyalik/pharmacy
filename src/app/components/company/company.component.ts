@@ -25,7 +25,7 @@ export class CompanyComponent implements OnInit {
   submitted = false;
   refreshList$ = new BehaviorSubject<boolean>(true);
   formModel: FormGroup = new FormGroup({});
-  constructor(private compService: CompanyService, private modalService: BsModalService, 
+  constructor(private compService: CompanyService, private modalService: BsModalService,
     private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
     this.formModel = this.fb.group({
       bank_id: ['', Validators.required],

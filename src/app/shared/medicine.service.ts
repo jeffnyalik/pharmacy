@@ -12,4 +12,7 @@ export class MedicineService {
   getMedicine(){
    return this.http.get<Medicines[]>(`${this.medicineUrl}`);
   }
+  addMedicine(medicine: Medicines){
+    return this.http.post(`${this.medicineUrl}`, medicine);
+  }
 }

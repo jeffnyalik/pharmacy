@@ -13,6 +13,5 @@ export class Medicines{
         public mfg_date: Date,
         public description: string,
         public in_stock_total: number,
-        public company_id: number, // drop down list of companies
     ){}
 }
