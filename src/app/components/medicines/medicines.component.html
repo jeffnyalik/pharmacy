@@ -52,7 +52,7 @@
                                         <th>Mfgd</th>
                                         <th>Exp</th>
                                         <th>Stock</th>
-                                        <th>Description</th>
+                                        <!-- <th>Description</th> -->
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -67,10 +67,11 @@
                                         <td>{{med.mfg_date}}</td>
                                         <td>{{med.exp_date}}</td>
                                         <td>{{med.in_stock_total}}</td>
-                                        <td>{{med.description}}</td>
+                                        <!-- <td>{{med.description}}</td> -->
                                         <td>
-                                            <a class="btn btn-info rounded-0 btn-sm "><i class="fa fa-edit " aria-hidden="true "></i></a>
-                                            <a class="btn btn-danger rounded-0 btn-sm "><i class="fa fa-trash " aria-hidden="true "></i></a>
+                                            <button class="btn btn-info rounded-0 btn-sm" [routerLink]="['/medicine-details', med.id]" routerLinkActive="router-link-active">
+                                            <i class="fa fa-eye"></i>
+                                            </button>
                                         </td>
 
                                     </tr>
@@ -93,16 +94,97 @@
     <!-- /.content -->
     <!-- Add Medicine -->
     <ng-template #template>
-        <div class="modal-header ">
-            <h4 class="modal-title pull-left">Medicine</h4>
-            <button type="button" class="close pull-right " aria-label="Close " (click)="modalRef.hide() ">
-        <span aria-hidden="true ">&times;</span>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Add Medicine</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
       </button>
         </div>
-        <div class="modal-body ">
+        <div class="modal-body">
             <form [formGroup]="formModel" autocomplete="off" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <input formControlName="name" class="form-control" placeholder="Enter Name" [(ngModel)]="medicineInfo.name">
+                    <div *ngIf="f.name.touched && f.name.invalid " class="alert alert-danger ">
+                        <div *ngIf="f.name.errors.required ">name is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="medical_type" class="form-control" placeholder="Medical type">
+                    <div *ngIf="f.medical_type.touched && f.medical_type.invalid" class="alert alert-danger ">
+                        <span *ngIf="f.medical_type.errors.required ">required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="buy_price" class="form-control" type="number" placeholder="buying price">
+                    <div *ngIf="f.buy_price.touched && f.buy_price.invalid" class="alert alert-danger ">
+                        <div *ngIf="f.buy_price.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input formControlName="sell_price" class="form-control" placeholder="SP">
+                    <div *ngIf="f.sell_price.touched && f.sell_price.invalid" class="alert alert-danger">
+                        <div *ngIf="f.sell_price.errors.required">Address is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="batch_no" class="form-control" placeholder="batch number">
+                    <div *ngIf="f.batch_no.touched && f.batch_no.invalid" class="alert alert-danger">
+                        <div *ngIf="f.batch_no.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="shelf_no" class="form-control" placeholder="Shelf no">
+                    <div *ngIf="f.shelf_no.touched && f.shelf_no.invalid" class="alert alert-danger">
+                        <div *ngIf="f.shelf_no.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="mfg_date">Expiration date</label>
+                    <input formControlName="exp_date" class="form-control" type="date">
+                    <div *ngIf="f.exp_date.touched && f.exp_date.invalid" class="alert alert-danger">
+                        <div *ngIf="f.exp_date.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mfg_date">Manufacturing date</label>
+                    <input formControlName="mfg_date" class="form-control" type="date">
+                    <div *ngIf="f.mfg_date.touched && f.mfg_date.invalid" class="alert alert-danger">
+                        <div *ngIf="f.mfg_date.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input formControlName="in_stock_total" class="form-control" placeholder="Stock" type="number">
+                    <div *ngIf="f.in_stock_total.touched && f.in_stock_total.invalid" class="alert alert-danger">
+                        <div *ngIf="f.in_stock_total.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" formControlName="description" rows="3" placeholder="Description"></textarea>
+                    <div *ngIf="f.description.touched && f.description.invalid" class="alert alert-danger">
+                        <div *ngIf="f.description.errors.required">Description required.</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary rounded-0" style="float:right;" [disabled]="!formModel.valid">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </ng-template>
+    <!-- end  -->
+
+    <!-- Edit Medicine -->
+    <ng-template #editTemplate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Edit Medicine</h4>
+            <button type="button" class="close pull-right " aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true ">&times;</span>
+      </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formModel" autocomplete="off" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input formControlName="name" class="form-control" placeholder="Enter Name" [(ngModel)]="medDetailsInfo.name">
                     <div *ngIf="f.name.touched && f.name.invalid " class="alert alert-danger ">
                         <div *ngIf="f.name.errors.required ">name is required.</div>
                     </div>

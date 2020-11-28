@@ -6,14 +6,14 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { MedicineService } from './../../shared/medicine.service';
+import { MedicineService } from 'src/app/shared/medicine.service';
 
 @Component({
-  selector: 'app-medicines',
-  templateUrl: './medicines.component.html',
-  styleUrls: ['./medicines.component.css']
+  selector: 'app-medicine-details',
+  templateUrl: './medicine-details.component.html',
+  styleUrls: ['./medicine-details.component.css']
 })
-export class MedicinesComponent implements OnInit {
+export class MedicineDetailsComponent implements OnInit {
   id: any;
   medDetailsInfo;
   medicineInfo;
@@ -22,8 +22,7 @@ export class MedicinesComponent implements OnInit {
   formModel: FormGroup = new FormGroup({});
   constructor(private medService: MedicineService, private modalService: BsModalService,
     private fb: FormBuilder, private router: Router, private toastr: ToastrService,
-    private route: ActivatedRoute
-    ) { 
+    private route: ActivatedRoute) {
       this.formModel = this.fb.group({
         name: ['', Validators.required],
         medical_type: ['', Validators.required],
@@ -36,9 +35,9 @@ export class MedicinesComponent implements OnInit {
         in_stock_total: ['', Validators.required],
         description: ['', Validators.required]
       });
-    }
+     }
 
-    get f(){
+     get f(){
       return this.formModel.controls;
     }
 
@@ -53,17 +52,6 @@ export class MedicinesComponent implements OnInit {
     this.getMedicineDetail(this.route.snapshot.paramMap.get('id'));
   }
 
-
-  // ############################# Modal pop up methods
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
-  editModal(editTemplate: TemplateRef<any>){
-    this.modalRef = this.modalService.show(editTemplate);
-  }
-  // ###################### End
-
   getMedicineDetail(id){
     this.medService.getMedInfo(id).subscribe(data => {
       this.medDetailsInfo = data;
@@ -73,19 +61,34 @@ export class MedicinesComponent implements OnInit {
     });
   }
 
+  editModal(editTemplate: TemplateRef<any>){
+    this.modalRef = this.modalService.show(editTemplate);
+  }
+
   onSubmit(){
-    this.submitted = true;
     if (this.formModel.invalid){
       return;
     }else{
-      this.medService.addMedicine(this.formModel.value).subscribe(data => {
+      this.medService.updateMedicine(this.id, this.formModel.value).subscribe(data => {
+        this.toastr.success('updated successfully');
         console.log(data);
-        this.formModel.reset();
-        this.toastr.success('Addedd successfully.');
       }, error => {
+        this.toastr.error('Error updating');
         console.log(error);
       });
     }
+    console.log('the form is working...');
+  }
+
+  deleteMed(){
+    this.medService.deleteMedicine(this.id).subscribe(data => {
+      this.toastr.warning('deleted');
+      console.log(data); // should return nothing
+      console.log('DELETED SUCCESSFULLY');
+      this.router.navigate(['/medicines']);
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

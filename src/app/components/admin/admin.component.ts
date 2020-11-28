@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MedicineService } from 'src/app/shared/medicine.service';
+
 import { UserService } from './../../shared/user.service';
 
 
@@ -11,7 +13,8 @@ import { UserService } from './../../shared/user.service';
 })
 export class AdminComponent implements OnInit {
   adminInfo;
-  constructor(private userService: UserService, private router: Router) { }
+  medInfo;
+  constructor(private userService: UserService, private medServ: MedicineService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.adminUser().subscribe(res => {
@@ -26,6 +29,11 @@ export class AdminComponent implements OnInit {
     if (!checkUser){
       this.router.navigate(['admin/login/']);
     }
+    // Medicine list
+    this.medServ.getMedicine().subscribe(data => {
+      this.medInfo = data;
+      console.log(this.medInfo);
+    });
   }
 
   onLogOut(){
@@ -35,5 +43,6 @@ export class AdminComponent implements OnInit {
       console.log('LoggedOut successfully');
     }, 1000);
   }
+  
 
 }

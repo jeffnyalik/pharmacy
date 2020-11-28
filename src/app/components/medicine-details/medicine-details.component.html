@@ -1,0 +1,152 @@
+<app-navbar>
+</app-navbar>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0 text-dark" style="font-family:sans-serif;">Dashboard</h4>
+                </div>
+                <hr>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <button class="btn btn-info rounded-0">Add Record</button>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+        <hr/>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-11">
+                    <div class="card rounded-0">
+                        <div class="card-header">
+                            Name: {{medDetailsInfo.name}}
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text">{{medDetailsInfo.description}}</p>
+                            <a (click)="editModal(editTemplate)" class="btn btn-info rounded-0 btn-sm">
+                                <i class="fa fa-edit" aria-hidden="true">edit</i>
+                            </a>
+
+
+                            <a class=" btn btn-danger rounded-0 btn-sm" style="margin-left:3px;">
+                                <span>
+                                        <i class="fa fa-trash" aria-hidden="true" (click)="deleteMed()">remove</i>
+                                </span>
+                            </a>
+                            <a [routerLink]="['/medicines']" routerLinkActive="router-link-active" class="btn btn-primary rounded-0" style="float:right ">Go back</a>
+                        </div>
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item ">
+                                <h5 class="card-title ">Type: </h5><span style="float:right;">{{medDetailsInfo.medical_type}}</span>
+                            </li>
+                            <li class="list-group-item ">
+                                <h5 class="card-title ">Buyin Price </h5><span style="float:right;">{{medDetailsInfo.buy_price}}</span>
+                            </li>
+                            <li class="list-group-item ">
+                                <h5 class="card-title ">Selling Price: </h5><span style="float:right; ">{{medDetailsInfo.sell_price}} </span>
+                            </li>
+                            <li class="list-group-item ">
+                                <h5 class="card-title ">BatchNo: </h5><span style="float:right; ">{{medDetailsInfo.batch_no}}</span>
+                            </li>
+                            <li class="list-group-item ">
+                                <h5 class="card-title">Shelf:</h5><span style="float:right;">{{medDetailsInfo.shelf_no}}</span>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Edit Medicine -->
+    <ng-template #editTemplate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Edit Medicine</h4>
+            <button type="button" class="close pull-right " aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true ">&times;</span>
+      </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formModel" autocomplete="off" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input formControlName="name" class="form-control" placeholder="Enter Name" [(ngModel)]="medDetailsInfo.name">
+                    <div *ngIf="f.name.touched && f.name.invalid " class="alert alert-danger ">
+                        <div *ngIf="f.name.errors.required ">name is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="medical_type" class="form-control" placeholder="Medical type" [(ngModel)]="medDetailsInfo.medical_type">
+                    <div *ngIf="f.medical_type.touched && f.medical_type.invalid" class="alert alert-danger ">
+                        <span *ngIf="f.medical_type.errors.required ">required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="buy_price" class="form-control" type="number" placeholder="buying price" [(ngModel)]="medDetailsInfo.buy_price">
+                    <div *ngIf="f.buy_price.touched && f.buy_price.invalid" class="alert alert-danger ">
+                        <div *ngIf="f.buy_price.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input formControlName="sell_price" class="form-control" placeholder="SP" [(ngModel)]="medDetailsInfo.sell_price">
+                    <div *ngIf="f.sell_price.touched && f.sell_price.invalid" class="alert alert-danger">
+                        <div *ngIf="f.sell_price.errors.required">Address is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="batch_no" class="form-control" placeholder="batch number" [(ngModel)]="medDetailsInfo.batch_no">
+                    <div *ngIf="f.batch_no.touched && f.batch_no.invalid" class="alert alert-danger">
+                        <div *ngIf="f.batch_no.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input formControlName="shelf_no" class="form-control" placeholder="Shelf no" [(ngModel)]="medDetailsInfo.shelf_no">
+                    <div *ngIf="f.shelf_no.touched && f.shelf_no.invalid" class="alert alert-danger">
+                        <div *ngIf="f.shelf_no.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="mfg_date">Expiration date</label>
+                    <input formControlName="exp_date" class="form-control" type="date" [(ngModel)]="medDetailsInfo.exp_date">
+                    <div *ngIf="f.exp_date.touched && f.exp_date.invalid" class="alert alert-danger">
+                        <div *ngIf="f.exp_date.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mfg_date">Manufacturing date</label>
+                    <input formControlName="mfg_date" class="form-control" type="date" [(ngModel)]="medDetailsInfo.mfg_date">
+                    <div *ngIf="f.mfg_date.touched && f.mfg_date.invalid" class="alert alert-danger">
+                        <div *ngIf="f.mfg_date.errors.required ">required.</div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input formControlName="in_stock_total" class="form-control" placeholder="Stock" type="number" [(ngModel)]="medDetailsInfo.in_stock_total">
+                    <div *ngIf="f.in_stock_total.touched && f.in_stock_total.invalid" class="alert alert-danger">
+                        <div *ngIf="f.in_stock_total.errors.required">required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" formControlName="description" rows="3" placeholder="Description" [(ngModel)]="medDetailsInfo.description"></textarea>
+                    <div *ngIf="f.description.touched && f.description.invalid" class="alert alert-danger">
+                        <div *ngIf="f.description.errors.required">Description required.</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary rounded-0" style="float:right;" [disabled]="!formModel.valid">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </ng-template>
+    <!-- end  -->
+</div>
